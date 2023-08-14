@@ -1,0 +1,51 @@
+class ToDoList:
+    def __init__(self):
+        self.tasks = []
+
+    def add_task(self, task):
+        self.tasks.append({"task": task, "completed": False})
+
+    def mark_completed(self, task_index):
+        if 0 <= task_index < len(self.tasks):
+            self.tasks[task_index]["completed"] = True
+        else:
+            print("Invalid task index.")
+
+    def display_tasks(self):
+        if not self.tasks:
+            print("No tasks in the list.")
+        else:
+            for index, task in enumerate(self.tasks):
+                status = "✓" if task["completed"] else " "
+                print(f"{index + 1}. [{status}] {task['task']}")
+
+def main():
+    todo_list = ToDoList()
+
+    while True:
+        print("\n==== To-Do List ====")
+        print("1. Add Task")
+        print("2. Mark Task as Completed")
+        print("3. Display Tasks")
+        print("4. Quit")
+        
+        choice = input("Enter your choice: ")
+        
+        if choice == "1":
+            task = input("Enter the task: ")
+            todo_list.add_task(task)
+            print("Task added successfully.")
+        elif choice == "2":
+            todo_list.display_tasks()
+            task_index = int(input("Enter the task number to mark as completed: ")) - 1
+            todo_list.mark_completed(task_index)
+        elif choice == "3":
+            todo_list.display_tasks()
+        elif choice == "4":
+            print("Goodbye!")
+            break
+        else:
+            print("Invalid choice. Please choose a valid option.")
+
+if __name__ == "__main__":
+    main()
